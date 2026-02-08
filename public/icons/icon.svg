@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#0a0a1a"/>
+  <rect x="40" y="40" width="432" height="432" rx="32" fill="none" stroke="#1a1a3e" stroke-width="8"/>
+  <!-- Grid lines -->
+  <line x1="184" y1="40" x2="184" y2="472" stroke="#1a1a3e" stroke-width="4"/>
+  <line x1="328" y1="40" x2="328" y2="472" stroke="#1a1a3e" stroke-width="4"/>
+  <line x1="40" y1="184" x2="472" y2="184" stroke="#1a1a3e" stroke-width="4"/>
+  <line x1="40" y1="328" x2="472" y2="328" stroke="#1a1a3e" stroke-width="4"/>
+  <!-- Highlighted word (diagonal) -->
+  <rect x="60" y="60" width="120" height="100" rx="12" fill="#e94560" opacity="0.3"/>
+  <rect x="204" y="204" width="120" height="100" rx="12" fill="#e94560" opacity="0.3"/>
+  <rect x="348" y="348" width="104" height="100" rx="12" fill="#e94560" opacity="0.3"/>
+  <!-- Letters -->
+  <text x="112" y="130" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#e0e0e0" text-anchor="middle">O</text>
+  <text x="256" y="130" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#555" text-anchor="middle">K</text>
+  <text x="400" y="130" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#555" text-anchor="middle">M</text>
+  <text x="112" y="274" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#555" text-anchor="middle">L</text>
+  <text x="256" y="274" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#e0e0e0" text-anchor="middle">R</text>
+  <text x="400" y="274" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#555" text-anchor="middle">A</text>
+  <text x="112" y="418" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#555" text-anchor="middle">F</text>
+  <text x="256" y="418" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#555" text-anchor="middle">N</text>
+  <text x="400" y="418" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#00b894" text-anchor="middle">D</text>
+</svg>

@@ -1,0 +1,18 @@
+<div class="grid">
+  @for (row of grid; track $index; let r = $index) {
+    <div class="row">
+      @for (cell of row; track $index; let c = $index) {
+        <button
+          class="cell"
+          [class.start]="isStartCell(r, c)"
+          [class.found]="isFoundCell(r, c)"
+          [class.preview]="isPreviewCell(r, c)"
+          (click)="onCellClick(r, c)"
+          (mouseenter)="onCellHover(r, c)"
+          (touchstart)="onTouchCell($event, r, c)">
+          {{ cell }}
+        </button>
+      }
+    </div>
+  }
+</div>

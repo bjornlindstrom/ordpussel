@@ -1,0 +1,12 @@
+<div class="word-list">
+  <div class="counter">
+    Found: {{ foundWords.size }} / {{ words.length }}
+  </div>
+  <div class="words">
+    @for (word of words; track word) {
+      <span class="word" [class.found]="foundWords.has(word)">
+        {{ word }}
+      </span>
+    }
+  </div>
+</div>

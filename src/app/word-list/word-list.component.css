@@ -1,0 +1,56 @@
+.word-list {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 180px;
+}
+
+.counter {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00b894;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #16213e;
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.word {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  color: #a0a0b0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.word.found {
+  color: #00b894;
+  text-decoration: line-through;
+  background: rgba(0, 184, 148, 0.1);
+}
+
+@media (max-width: 600px) {
+  .word-list {
+    width: 100%;
+    padding: 12px;
+    min-width: 0;
+  }
+
+  .words {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .word {
+    font-size: 13px;
+    padding: 3px 6px;
+  }
+}

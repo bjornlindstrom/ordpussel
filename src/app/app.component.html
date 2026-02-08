@@ -1,0 +1,26 @@
+<div class="container">
+  <header>
+    <h1>Word Search</h1>
+    <button class="new-game-btn" (click)="newGame()">New Game</button>
+  </header>
+
+  @if (message) {
+    <div class="message">
+      {{ message }}
+    </div>
+  }
+
+  @if (grid.length) {
+    <div class="game">
+      <app-game-board
+        [grid]="grid"
+        [foundCells]="foundCells"
+        (cellsSelected)="onCellsSelected($event)">
+      </app-game-board>
+      <app-word-list
+        [words]="words"
+        [foundWords]="foundWords">
+      </app-word-list>
+    </div>
+  }
+</div>
