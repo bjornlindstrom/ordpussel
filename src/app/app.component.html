@@ -1,6 +1,16 @@
 <div class="container">
   <header>
     <h1>Word Search</h1>
+    <div class="size-selector">
+      @for (size of gridSizes; track size) {
+        <button
+          class="size-btn"
+          [class.active]="gridSize === size"
+          (click)="setGridSize(size)">
+          {{ size }}x{{ size }}
+        </button>
+      }
+    </div>
     <button class="new-game-btn" (click)="newGame()">New Game</button>
   </header>
 
@@ -14,6 +24,7 @@
     <div class="game">
       <app-game-board
         [grid]="grid"
+        [gridSize]="gridSize"
         [foundCells]="foundCells"
         (cellsSelected)="onCellsSelected($event)">
       </app-game-board>

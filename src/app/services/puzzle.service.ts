@@ -13,9 +13,12 @@ export interface Puzzle {
   positions: { [word: string]: WordPosition };
 }
 
-const GRID_SIZE = 10;
-const MIN_WORDS = 8;
-const MAX_WORDS = 12;
+const WORD_COUNTS: { [size: number]: [number, number] } = {
+  4: [3, 5],
+  6: [5, 7],
+  8: [7, 10],
+  10: [8, 12],
+};
 
 const DIRECTIONS = [
   [0, 1], [0, -1], [1, 0], [-1, 0],
@@ -67,26 +70,28 @@ const FILL_LETTERS = 'ABCDEFGHIJKLMNOPRSTUVÅÄÖAEIORSTLN';
 @Injectable({ providedIn: 'root' })
 export class PuzzleService {
 
-  generatePuzzle(): Puzzle {
-    const grid: string[][] = Array.from({ length: GRID_SIZE }, () =>
-      Array(GRID_SIZE).fill('')
+  generatePuzzle(gridSize: number = 10): Puzzle {
+    const grid: string[][] = Array.from({ length: gridSize }, () =>
+      Array(gridSize).fill('')
     );
     const positions: { [word: string]: WordPosition } = {};
 
-    const shuffled = [...WORD_BANK];
+    const eligible = WORD_BANK.filter(w => w.length <= gridSize);
+    const shuffled = [...eligible];
     this.shuffle(shuffled);
 
-    const targetWords = MIN_WORDS + Math.floor(Math.random() * (MAX_WORDS - MIN_WORDS + 1));
+    const [minWords, maxWords] = WORD_COUNTS[gridSize] ?? [3, 5];
+    const targetWords = minWords + Math.floor(Math.random() * (maxWords - minWords + 1));
     let placed = 0;
 
     for (const word of shuffled) {
       if (placed >= targetWords) break;
-      if (this.tryPlaceWord(grid, word, positions)) {
+      if (this.tryPlaceWord(grid, word, positions, gridSize)) {
         placed++;
       }
     }
 
-    this.fillEmptyCells(grid);
+    this.fillEmptyCells(grid, gridSize);
 
     return { grid, words: Object.keys(positions), positions };
   }
@@ -109,13 +114,13 @@ export class PuzzleService {
     return { found: false, word: null };
   }
 
-  private tryPlaceWord(grid: string[][], word: string, positions: { [word: string]: WordPosition }): boolean {
+  private tryPlaceWord(grid: string[][], word: string, positions: { [word: string]: WordPosition }, gridSize: number): boolean {
     const dirs = [...DIRECTIONS];
     this.shuffle(dirs);
 
     const starts: [number, number][] = [];
-    for (let r = 0; r < GRID_SIZE; r++) {
-      for (let c = 0; c < GRID_SIZE; c++) {
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
         starts.push([r, c]);
       }
     }
@@ -123,7 +128,7 @@ export class PuzzleService {
 
     for (const [r, c] of starts) {
       for (const [dr, dc] of dirs) {
-        if (this.canPlace(grid, word, r, c, dr, dc)) {
+        if (this.canPlace(grid, word, r, c, dr, dc, gridSize)) {
           this.placeWord(grid, word, r, c, dr, dc);
           positions[word] = {
             startRow: r,
@@ -138,11 +143,11 @@ export class PuzzleService {
     return false;
   }
 
-  private canPlace(grid: string[][], word: string, row: number, col: number, dRow: number, dCol: number): boolean {
+  private canPlace(grid: string[][], word: string, row: number, col: number, dRow: number, dCol: number, gridSize: number): boolean {
     for (let i = 0; i < word.length; i++) {
       const r = row + i * dRow;
       const c = col + i * dCol;
-      if (r < 0 || r >= GRID_SIZE || c < 0 || c >= GRID_SIZE) return false;
+      if (r < 0 || r >= gridSize || c < 0 || c >= gridSize) return false;
       if (grid[r][c] !== '' && grid[r][c] !== word[i]) return false;
     }
     return true;
@@ -154,9 +159,9 @@ export class PuzzleService {
     }
   }
 
-  private fillEmptyCells(grid: string[][]): void {
-    for (let r = 0; r < GRID_SIZE; r++) {
-      for (let c = 0; c < GRID_SIZE; c++) {
+  private fillEmptyCells(grid: string[][], gridSize: number): void {
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
         if (grid[r][c] === '') {
           grid[r][c] = FILL_LETTERS[Math.floor(Math.random() * FILL_LETTERS.length)];
         }

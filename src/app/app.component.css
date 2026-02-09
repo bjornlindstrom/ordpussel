@@ -18,6 +18,33 @@ h1 {
   margin: 0;
 }
 
+.size-selector {
+  display: flex;
+  gap: 4px;
+}
+
+.size-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid #0f3460;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+  color: #e0e0e0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.size-btn:hover {
+  background: #0f3460;
+}
+
+.size-btn.active {
+  background: #e94560;
+  border-color: #e94560;
+  color: #fff;
+}
+
 .new-game-btn {
   padding: 10px 24px;
   font-size: 15px;
@@ -58,6 +85,11 @@ h1 {
 
   h1 {
     font-size: 22px;
+  }
+
+  .size-btn {
+    padding: 4px 8px;
+    font-size: 11px;
   }
 
   .new-game-btn {

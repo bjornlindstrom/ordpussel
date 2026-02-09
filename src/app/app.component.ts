@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
   foundWords = new Set<string>();
   foundCells = new Set<string>();
   message = '';
+  gridSize = 10;
+  gridSizes = [4, 6, 8, 10];
 
   constructor(private puzzleService: PuzzleService) {}
 
@@ -29,10 +31,15 @@ export class AppComponent implements OnInit {
     this.message = '';
     this.foundWords = new Set();
     this.foundCells = new Set();
-    const puzzle = this.puzzleService.generatePuzzle();
+    const puzzle = this.puzzleService.generatePuzzle(this.gridSize);
     this.grid = puzzle.grid;
     this.words = puzzle.words;
     this.positions = puzzle.positions;
+  }
+
+  setGridSize(size: number): void {
+    this.gridSize = size;
+    this.newGame();
   }
 
   onCellsSelected(selection: { startRow: number; startCol: number; endRow: number; endCol: number }): void {

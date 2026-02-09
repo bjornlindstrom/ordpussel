@@ -66,8 +66,8 @@
   }
 
   .cell {
-    width: calc((100vw - 36px) / 10);
-    height: calc((100vw - 36px) / 10);
+    width: calc((100vw - 36px) / var(--grid-size, 10));
+    height: calc((100vw - 36px) / var(--grid-size, 10));
     font-size: 14px;
     border-radius: 4px;
   }

@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class GameBoardComponent {
   @Input() grid: string[][] = [];
+  @Input() gridSize: number = 10;
   @Input() foundCells: Set<string> = new Set();
   @Output() cellsSelected = new EventEmitter<{ startRow: number; startCol: number; endRow: number; endCol: number }>();
 

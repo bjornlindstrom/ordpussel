@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" [style.--grid-size]="gridSize">
   @for (row of grid; track $index; let r = $index) {
     <div class="row">
       @for (cell of row; track $index; let c = $index) {
