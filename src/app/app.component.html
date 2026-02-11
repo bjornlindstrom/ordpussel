@@ -11,7 +11,10 @@
         </button>
       }
     </div>
-    <button class="new-game-btn" (click)="newGame()">New Game</button>
+    <div class="header-right">
+      <span class="completed-count">Completed: {{ completedCount }}</span>
+      <button class="new-game-btn" (click)="newGame()">New Game</button>
+    </div>
   </header>
 
   @if (message) {

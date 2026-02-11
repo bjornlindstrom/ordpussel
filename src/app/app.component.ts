@@ -20,10 +20,19 @@ export class AppComponent implements OnInit {
   message = '';
   gridSize = 10;
   gridSizes = [4, 6, 8, 10];
+  completedCount = 0;
+
+  private readonly STORAGE_KEY = 'wordSearchCompleted';
+  private readonly SIZE_KEY = 'wordSearchGridSize';
 
   constructor(private puzzleService: PuzzleService) {}
 
   ngOnInit(): void {
+    this.completedCount = parseInt(localStorage.getItem(this.STORAGE_KEY) ?? '0', 10) || 0;
+    const savedSize = parseInt(localStorage.getItem(this.SIZE_KEY) ?? '', 10);
+    if (this.gridSizes.includes(savedSize)) {
+      this.gridSize = savedSize;
+    }
     this.newGame();
   }
 
@@ -39,6 +48,7 @@ export class AppComponent implements OnInit {
 
   setGridSize(size: number): void {
     this.gridSize = size;
+    localStorage.setItem(this.SIZE_KEY, size.toString());
     this.newGame();
   }
 
@@ -52,6 +62,8 @@ export class AppComponent implements OnInit {
       this.foundWords = new Set(this.foundWords).add(result.word);
       this.markFoundCells(result.word);
       if (this.foundWords.size === this.words.length) {
+        this.completedCount++;
+        localStorage.setItem(this.STORAGE_KEY, this.completedCount.toString());
         this.message = 'Congratulations! You found all the words!';
       }
     }

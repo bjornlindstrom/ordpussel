@@ -45,6 +45,18 @@ h1 {
   color: #fff;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.completed-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: #00b894;
+}
+
 .new-game-btn {
   padding: 10px 24px;
   font-size: 15px;
